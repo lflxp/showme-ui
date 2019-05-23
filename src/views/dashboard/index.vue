@@ -6,6 +6,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Showme from '@/utils/showme'
 
 export default {
   name: 'Dashboard',
@@ -13,6 +14,40 @@ export default {
     ...mapGetters([
       'name'
     ])
+  },
+  mounted() {
+    // this.getables()
+    // this.getnote()
+    this.exec()
+    this.getdbs()
+  },
+  methods: {
+    getables() {
+      Showme.GetAllTables('test').then(data => {
+        console.log('getables', data)
+      })
+    },
+    getnote() {
+      Showme.GetNote().then(data => {
+        console.log('getnote', data)
+      })
+    },
+    getdbs() {
+      var t = {
+        'sql': 'select 200'
+      }
+      Showme.dbs(t).then(data => {
+        console.log('dbs', data)
+      })
+    },
+    exec() {
+      var t = {
+        'sql': 'select 100'
+      }
+      Showme.exec(t).then(data => {
+        console.log('exec', data)
+      })
+    }
   }
 }
 </script>
